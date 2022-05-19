@@ -24,6 +24,7 @@ let items = {
 
 let itemsArr = [
   // In an array, these objects are indexed by their number and don't have a unique "key" [to call from array]
+  // indexed by number
   {
     brand: "TaylorMade",
     color: "white",
@@ -44,8 +45,10 @@ let itemsArr = [
 let cart = []
 
 function drawItemsDict() {
+  // Set up a template to 'dump' the html below into as we iterate
   let template = ""
   for (let key in items) {
+    // Aliasing out each individual item as we iterate 
     let item = items[key]
     template += /*html*/ `
     <div class="col-md-4">
@@ -60,12 +63,14 @@ function drawItemsDict() {
   </div>
     `
   }
+  // after iteration is complete, take that template string full of HTML code, and inject it into our DOM
   document.getElementById('shop-items').innerHTML = template
 }
 
 
 function drawItemsArr() {
   let template = ""
+  // i is representing each object in our array (collection)
   itemsArr.forEach(i =>
     template += /*html*/ `
     <div class="col-md-4">
@@ -84,13 +89,17 @@ function drawItemsArr() {
 }
 
 function addToCart(itemKey) {
+  // we passed through the key from our iteration so we know what item we need to grab out of the dictionary
   cart.push(items[itemKey])
+  // take that item we found, and push it into our empty cart array
   console.log(cart);
+  // call our draw function
   drawCart()
 }
 
 function drawCart() {
   let template = ""
+  // since our cart is an array, we will use a forEach loop to add html to this template string and inject it to the cart portion of our page
   cart.forEach(c => template += `<h6>${c.brand}</h6>`)
   document.getElementById('cart').innerHTML = template
 }
